@@ -23,7 +23,7 @@ let statuss = {Customer: x, status: "pending", items: stock};
 let pendingStatus = orders.push(statuss);//push into order array
 return pendingStatus;
 }
-placeOrder("Sam",orderedItems);
+placeOrder("Micheal",orderedItems);
 console.log(orders);
 
 function calculateTotal(y){
@@ -39,3 +39,14 @@ sum = console.log(`The sum is $${sum}`);
 return sum;
 }
 calculateTotal(orderedItems);
+
+function completeOrder(x){
+let found = orders.findIndex(person=>person.Customer === x);
+if (found === -1){
+    console.log("No order found try again")//error catching
+}
+else{
+orders[found].status = "complete";//use index to modify status
+}
+}
+completeOrder("Micheal");
