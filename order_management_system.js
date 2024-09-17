@@ -6,19 +6,22 @@ const inventory = [{name: "icecream", price: 3.49, quantity:0},
 let orders = [];
 let orderedItems = ["icecream", "rootbeer", "oreos", "oreos"];
 function placeOrder(x,y){
-let counter = [];
+    let stock = []
 for (i = 0; i<y.length; i++){
-  let indexItems = inventory.indexOf(y[i]);
-    counter.push(indexItems); 
-    if (inventory[counter[i].quantity]<1){
+    let index = inventory.findIndex(item => item.name === y[i]); //Finds index of our ordered items in the inventory VERY IMPORTANT
+    if (inventory[index].quantity<1){//takes the index.quantity and checks if its in stock
         console.log(`${y[i]} in your order is out of stock`)
+        continue;//will skip whats below if it is out of stock
     }
+    
     else {
-        inventory[counter[i].quantity-1]
+        inventory[index].quantity-=1;
+        console.log(`There are ${inventory[index].quantity} ${y[i]} left`);//subtracts 1 for every quantity
+        stock.push({itemName: y[i], amount: 1});  
     }
 }
-let status = {Customer: x, status: "pending", items: y}
-let pendingStatus = orders.push(status)
+let statuss = {Customer: x, status: "pending", items: stock};
+let pendingStatus = orders.push(statuss);//push into order array
 return pendingStatus;
 }
 placeOrder("Sam",orderedItems);
