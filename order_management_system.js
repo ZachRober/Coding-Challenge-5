@@ -23,7 +23,10 @@ let statuss = {Customer: x, status: "pending", items: stock};
 let pendingStatus = orders.push(statuss);//push into order array
 return pendingStatus;
 }
+
+placeOrder("Sam",orderedItems);
 placeOrder("Micheal",orderedItems);
+
 console.log(orders);
 
 function calculateTotal(y){
@@ -49,4 +52,15 @@ else{
 orders[found].status = "complete";//use index to modify status
 }
 }
-completeOrder("Micheal");
+completeOrder("Sam");
+function checkPendingOrders(){ 
+     let pendingOrders = orders.filter(order=>order.status === "pending");
+     if(pendingOrders===0){
+        return;
+     }
+     else{
+    pendingOrders.forEach(order=>console.log(order));
+     } 
+}  
+checkPendingOrders();
+
